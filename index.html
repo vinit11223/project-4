@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dynamic REST API product dashboard">
+  <title>DynamicStore — REST API Client</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="DynamicStore home">
+        <span class="brand-mark" aria-hidden="true">D</span>
+        <span>
+          <strong>DynamicStore</strong>
+          <small>REST API client</small>
+        </span>
+      </a>
+
+      <div class="header-actions">
+        <span id="connection-status" class="connection-status" role="status" aria-live="polite">
+          Connecting…
+        </span>
+        <button id="cart-button" class="cart-button" type="button" aria-controls="cart-panel" aria-expanded="false">
+          <span aria-hidden="true">🛒</span>
+          Cart
+          <span id="cart-count" class="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div id="error-banner" class="error-banner" role="alert" hidden>
+    <div class="container error-inner">
+      <div>
+        <strong>Unable to load products</strong>
+        <p id="error-message">Please check your connection and try again.</p>
+      </div>
+      <button id="retry-button" class="button button-dark" type="button">Retry</button>
+    </div>
+  </div>
+
+  <main id="main-content" class="container">
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Live catalog</p>
+        <h1 id="page-title">Explore the <span>collection.</span></h1>
+        <p>Products are fetched asynchronously from a public REST API and rendered dynamically with modern JavaScript.</p>
+      </div>
+      <div class="api-pill">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span>API connected</span>
+      </div>
+    </section>
+
+    <section class="controls" aria-labelledby="controls-title">
+      <h2 id="controls-title" class="sr-only">Catalog controls</h2>
+
+      <div class="search-box">
+        <label for="search">Search products</label>
+        <div class="search-input-wrap">
+          <span aria-hidden="true">⌕</span>
+          <input id="search" type="search" placeholder="Search by product name…" autocomplete="off">
+          <button id="clear-search" class="clear-button" type="button" aria-label="Clear search" hidden>×</button>
+        </div>
+      </div>
+
+      <div class="sort-box">
+        <label for="sort">Sort by</label>
+        <select id="sort">
+          <option value="featured">Featured</option>
+          <option value="price-asc">Price: Low to high</option>
+          <option value="price-desc">Price: High to low</option>
+          <option value="rating">Highest rated</option>
+          <option value="name">Name: A to Z</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="category-section" aria-labelledby="category-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Browse</p>
+          <h2 id="category-title">Categories</h2>
+        </div>
+        <p id="result-count" class="result-count" role="status" aria-live="polite">Loading…</p>
+      </div>
+      <div id="category-tabs" class="category-tabs" role="tablist" aria-label="Product categories"></div>
+    </section>
+
+    <section aria-labelledby="products-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Catalog</p>
+          <h2 id="products-title">Products</h2>
+        </div>
+      </div>
+
+      <div id="loading-state" class="product-grid" aria-label="Loading products">
+        <div class="skeleton-card" aria-hidden="true"></div>
+        <div class="skeleton-card" aria-hidden="true"></div>
+        <div class="skeleton-card" aria-hidden="true"></div>
+        <div class="skeleton-card" aria-hidden="true"></div>
+        <div class="skeleton-card" aria-hidden="true"></div>
+        <div class="skeleton-card" aria-hidden="true"></div>
+      </div>
+
+      <div id="empty-state" class="empty-state" hidden>
+        <span aria-hidden="true">⌕</span>
+        <h3>No products found</h3>
+        <p>Try a different search term or category.</p>
+        <button id="reset-filters" class="button button-primary" type="button">Reset filters</button>
+      </div>
+
+      <div id="product-grid" class="product-grid" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <aside id="cart-panel" class="cart-panel" aria-labelledby="cart-title" aria-hidden="true">
+    <div class="cart-header">
+      <div>
+        <p class="eyebrow">Your items</p>
+        <h2 id="cart-title">Shopping cart</h2>
+      </div>
+      <button id="close-cart" class="close-button" type="button" aria-label="Close shopping cart">×</button>
+    </div>
+
+    <div id="cart-items" class="cart-items">
+      <p class="cart-empty">Your cart is empty.</p>
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total</span>
+        <strong id="cart-total">$0.00</strong>
+      </div>
+      <button id="checkout-button" class="button button-primary checkout-button" type="button">Checkout</button>
+      <p class="checkout-note">Demo checkout — no payment is processed.</p>
+    </div>
+  </aside>
+
+  <div id="cart-backdrop" class="cart-backdrop" hidden></div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <strong>DynamicStore</strong>
+      <p>Dynamic JavaScript DOM + RESTful API client demonstration.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
